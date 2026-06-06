@@ -1,4 +1,3 @@
-
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -11,7 +10,10 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "https://she-can-foundation.vercel.app", // ✅ Replace with your actual Vercel URL after deploy
+    ],
     credentials: true,
   })
 );
@@ -254,4 +256,3 @@ app.listen(PORT, () => {
     "👤 Admin Login -> username: admin | password: mohit123"
   );
 });
-
