@@ -13,7 +13,6 @@ import {
   Loader2,
 } from "lucide-react";
 
-//  Backend URL
 const API_URL = "https://she-can-foundation-biit.onrender.com";
 
 function AdminPanel() {
@@ -30,14 +29,13 @@ function AdminPanel() {
 
   const navigate = useNavigate();
 
-  // Fetch submissions
   useEffect(() => {
     if (!token) return;
 
     setLoading(true);
 
     axios
-      .get(`${API_URL}/api/submissions`, {  // ✅ updated
+      .get(`${API_URL}/api/submissions`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -58,7 +56,7 @@ function AdminPanel() {
 
     try {
       const res = await axios.post(
-        `${API_URL}/api/login`,  // ✅ updated
+        `${API_URL}/api/login`,
         creds
       );
 
@@ -80,7 +78,7 @@ function AdminPanel() {
 
     try {
       await axios.delete(
-        `${API_URL}/api/submissions/${id}`,  // ✅ updated
+        `${API_URL}/api/submissions/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -106,11 +104,8 @@ function AdminPanel() {
   if (!token) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-pink-100 via-white to-rose-100 flex items-center justify-center px-4">
-
         <div className="bg-white/80 backdrop-blur-xl border border-white rounded-3xl shadow-2xl p-8 w-full max-w-md">
-
           <div className="text-center mb-8">
-
             <div className="w-16 h-16 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 text-white flex items-center justify-center mx-auto shadow-lg">
               <ShieldCheck size={30} />
             </div>
@@ -122,11 +117,9 @@ function AdminPanel() {
             <p className="text-gray-500 mt-2">
               She Can Foundation Dashboard
             </p>
-
           </div>
 
           <div className="space-y-4">
-
             <input
               type="text"
               placeholder="Username"
@@ -155,7 +148,6 @@ function AdminPanel() {
               }
               className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-4 focus:ring-pink-100 focus:border-pink-500 outline-none"
             />
-
           </div>
 
           {error && (
@@ -177,7 +169,6 @@ function AdminPanel() {
           >
             ← Back to Contact Form
           </button>
-
         </div>
       </div>
     );
@@ -186,19 +177,15 @@ function AdminPanel() {
   // ================= DASHBOARD =================
   return (
     <div className="min-h-screen bg-gray-50 p-6">
-
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
         <div className="bg-gradient-to-r from-pink-500 to-rose-500 rounded-3xl p-8 text-white shadow-xl mb-8">
-
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-
             <div>
               <h1 className="text-3xl font-bold">
                 Admin Dashboard
               </h1>
-
               <p className="text-pink-100 mt-2">
                 Manage all contact form submissions
               </p>
@@ -211,100 +198,76 @@ function AdminPanel() {
               <LogOut size={18} />
               Logout
             </button>
-
           </div>
-
         </div>
 
         {/* Stats Cards */}
         <div className="grid md:grid-cols-3 gap-5 mb-8">
-
           <div className="bg-white rounded-2xl shadow-md p-5">
             <div className="flex justify-between items-center">
-
               <div>
                 <p className="text-gray-500 text-sm">
                   Total Submissions
                 </p>
-
                 <h2 className="text-4xl font-bold text-pink-600 mt-2">
                   {submissions.length}
                 </h2>
               </div>
-
               <Users className="text-pink-500" size={42} />
-
             </div>
           </div>
 
           <div className="bg-white rounded-2xl shadow-md p-5">
             <div className="flex justify-between items-center">
-
               <div>
                 <p className="text-gray-500 text-sm">
                   Emails Received
                 </p>
-
                 <h2 className="text-4xl font-bold text-blue-600 mt-2">
                   {submissions.length}
                 </h2>
               </div>
-
               <Mail className="text-blue-500" size={42} />
-
             </div>
           </div>
 
           <div className="bg-white rounded-2xl shadow-md p-5">
             <div className="flex justify-between items-center">
-
               <div>
                 <p className="text-gray-500 text-sm">
                   System Status
                 </p>
-
                 <h2 className="text-xl font-semibold text-green-600 mt-2">
                   Active
                 </h2>
               </div>
-
               <Activity className="text-green-500" size={42} />
-
             </div>
           </div>
-
         </div>
 
         {/* Search */}
         <div className="relative mb-6">
-
           <Search
             size={18}
             className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
           />
-
           <input
             placeholder="Search by name or email..."
             value={search}
-            onChange={(e) =>
-              setSearch(e.target.value)
-            }
+            onChange={(e) => setSearch(e.target.value)}
             className="w-full pl-12 pr-4 py-3 rounded-xl bg-white border border-gray-200 shadow-sm focus:ring-4 focus:ring-pink-100 focus:border-pink-500 outline-none"
           />
-
         </div>
 
         {/* Table */}
         <div className="bg-white rounded-2xl shadow-md overflow-hidden">
-
           {loading ? (
             <div className="flex justify-center items-center py-20">
-
               <Loader2
                 size={32}
                 className="animate-spin text-pink-500"
               />
-
             </div>
           ) : filteredSubmissions.length === 0 ? (
             <div className="text-center py-20 text-gray-500">
@@ -312,51 +275,28 @@ function AdminPanel() {
             </div>
           ) : (
             <div className="overflow-x-auto">
-
               <table className="w-full">
-
                 <thead className="bg-pink-50">
-
                   <tr>
-                    <th className="px-6 py-4 text-left">
-                      User
-                    </th>
-                    <th className="px-6 py-4 text-left">
-                      Name
-                    </th>
-                    <th className="px-6 py-4 text-left">
-                      Email
-                    </th>
-                    <th className="px-6 py-4 text-left">
-                      Message
-                    </th>
-                    <th className="px-6 py-4 text-left">
-                      Date
-                    </th>
-                    <th className="px-6 py-4 text-left">
-                      Action
-                    </th>
+                    <th className="px-6 py-4 text-left">User</th>
+                    <th className="px-6 py-4 text-left">Name</th>
+                    <th className="px-6 py-4 text-left">Email</th>
+                    <th className="px-6 py-4 text-left">Message</th>
+                    <th className="px-6 py-4 text-left">Date</th>
+                    <th className="px-6 py-4 text-left">Action</th>
                   </tr>
-
                 </thead>
 
                 <tbody>
-
                   {filteredSubmissions.map((s) => (
                     <tr
                       key={s._id}
                       className="border-b hover:bg-pink-50 transition"
                     >
-
                       <td className="px-6 py-4">
-
                         <div className="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center">
-                          <User
-                            size={18}
-                            className="text-pink-600"
-                          />
+                          <User size={18} className="text-pink-600" />
                         </div>
-
                       </td>
 
                       <td className="px-6 py-4 font-medium">
@@ -372,43 +312,29 @@ function AdminPanel() {
                       </td>
 
                       <td className="px-6 py-4 text-gray-500">
-                        {new Date(s.date).toLocaleDateString(
-                          "en-IN"
-                        )}
+                        {new Date(s.date).toLocaleDateString("en-IN")}
                       </td>
 
                       <td className="px-6 py-4">
-
                         <button
-                          onClick={() =>
-                            handleDelete(s._id)
-                          }
+                          onClick={() => handleDelete(s._id)}
                           className="flex items-center gap-2 text-red-500 hover:text-red-700 transition"
                         >
                           <Trash2 size={16} />
                           Delete
                         </button>
-
                       </td>
-
                     </tr>
                   ))}
-
                 </tbody>
-
               </table>
-
             </div>
           )}
-
         </div>
 
       </div>
-
     </div>
   );
 }
 
 export default AdminPanel;
-                                                        size={18}
-          
