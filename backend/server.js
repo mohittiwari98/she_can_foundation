@@ -7,11 +7,13 @@ require("dotenv").config();
 const app = express();
 
 // ================= MIDDLEWARE =================
+
 app.use(
   cors({
     origin: [
       "http://localhost:5173",
       "https://she-can-foundation-five-delta.vercel.app",
+    ],                // ✅ closing bracket was missing
     credentials: true,
   })
 );
