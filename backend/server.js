@@ -7,13 +7,11 @@ require("dotenv").config();
 const app = express();
 
 // ================= MIDDLEWARE =================
-
 app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://she-can-foundation.vercel.app", // ✅ Replace with your actual Vercel URL after deploy
-    ],
+      "https://she-can-foundation-five-delta.vercel.app",
     credentials: true,
   })
 );
