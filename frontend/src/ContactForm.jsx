@@ -5,6 +5,9 @@ import * as yup from "yup";
 import axios from "axios";
 import { User, Mail, MessageSquare, Send, CheckCircle2 } from "lucide-react";
 
+// ✅ Backend URL
+const API_URL = "https://she-can-foundation-biit.onrender.com";
+
 const schema = yup.object({
   name: yup.string().required("Name is required"),
   email: yup
@@ -34,7 +37,7 @@ function ContactForm() {
     setServerError("");
 
     try {
-      await axios.post("http://localhost:5000/api/submit", data);
+      await axios.post(`${API_URL}/api/submit`, data); // ✅ updated
 
       setSubmitted(true);
       reset();
