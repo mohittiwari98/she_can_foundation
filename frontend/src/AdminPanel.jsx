@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +12,9 @@ import {
   User,
   Loader2,
 } from "lucide-react";
+
+//  Backend URL
+const API_URL = "https://she-can-foundation-biit.onrender.com";
 
 function AdminPanel() {
   const [token, setToken] = useState(localStorage.getItem("token") || "");
@@ -35,7 +37,7 @@ function AdminPanel() {
     setLoading(true);
 
     axios
-      .get("http://localhost:5000/api/submissions", {
+      .get(`${API_URL}/api/submissions`, {  // ✅ updated
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -56,7 +58,7 @@ function AdminPanel() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/login",
+        `${API_URL}/api/login`,  // ✅ updated
         creds
       );
 
@@ -78,7 +80,7 @@ function AdminPanel() {
 
     try {
       await axios.delete(
-        `http://localhost:5000/api/submissions/${id}`,
+        `${API_URL}/api/submissions/${id}`,  // ✅ updated
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -408,4 +410,5 @@ function AdminPanel() {
 }
 
 export default AdminPanel;
-
+                                                        size={18}
+          
